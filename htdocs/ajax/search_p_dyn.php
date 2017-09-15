@@ -20,10 +20,14 @@ $rcap = $search_settings['results_per_page'];
     .prev_link{
         position: relative;
         float: left;
+        cursor: pointer;
+        margin-top: 1.5em;
     }
     .next_link{
         position: relative;
         float: right;
+        cursor: pointer;
+        margin-top: 1.5em;
     }
 .customers
 {
@@ -165,42 +169,42 @@ background-color:#EAF2D3;
 	/*color: red; /*#009;*/
 }
 
-#resultset1 table {
+#data_table table {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
 }
 
-#resultset1 thead, #resultset1 tbody, #resultset1 tr, #resultset1 td, #resultset1 th { display: block; }
+#data_table thead, #data_table tbody, #data_table tr, #data_table td, #data_table th { display: block; }
 
-#resultset1 tr:after {
+#data_table tr:after {
     content: ' ';
     display: block;
     visibility: hidden;
     clear: both;
 }
 
-#resultset1 thead th { 
+#data_table thead th { 
     height: 30px;
     line-height: 30px;
     /*text-align: left;*/
 }
 
-#resultset1 tbody {
+#data_table tbody {
     height: 400px;
     overflow-y: auto;
 }
 
-#resultset1 thead {
+#data_table thead {
     /* fallback */
     width: 97%;
     /* minus scroll bar width */
     width: calc(100% - 17px);
 }
 
-#resultset1 tbody { border-top: 2px solid black; }
+#data_table tbody { border-top: 1px solid #9a9a9a; }
 
-#resultset1 tbody td, #resultset1 thead th {
+#data_table tbody td, #data_table thead th {
     width: 10%;
     float: left;
     height: 20px;
@@ -208,7 +212,7 @@ background-color:#EAF2D3;
     text-align: center;
 }
 
-#resultset1 tbody td:last-child, #resultset1 thead th:last-child {
+#data_table tbody td:last-child, #data_table thead th:last-child {
     border-right: none;
 }
 
@@ -216,7 +220,7 @@ background-color:#EAF2D3;
 </style>
 <script type='text/javascript'>
     $(document).ready(function(){
-        var lab_section = <?php echo $_REQUEST['lab_section']; ?>;
+        var lab_section = <?php echo $_REQUEST['lab_section']; ?> + '';
         url_string = 'ajax/get_result_count.php?a='+'<?php echo $_REQUEST['a']; ?>'+'&q='+'<?php echo $_REQUEST['q']; ?>'+'&labsection='+lab_section+'&c=<?php echo $_REQUEST['c']; ?>';
         var cap = parseInt($('#rcap').html());
         //console.log(cap);
@@ -274,11 +278,11 @@ function get_next(url, sno, cap)
     var page = parseInt($('#page').html()); 
     page = page + 1;
     $('#page').html(page);
-    var rem = parseInt($('#rem').html()); 
+    var rem = parseInt($('#rem').html());
     var tot = parseInt($('#tot').html());
     var cap = parseInt($('#rcap').html());
-     rem = rem - cap;
-    $('#rem').html(rem);
+	rem = rem -  cap; 
+	$('#rem').html(rem);
     var mpage = parseInt($('#mpage').html());
     
     var displayed = tot - rem;
@@ -405,7 +409,7 @@ else if($a == 1)
         else
         {
         	//echo "Fetch By Name section is ".$lab_section;
-            $patient_list = search_patients_by_name_dyn($q, $result_cap, $result_counter, $lab_section,$c);
+            $patient_list = search_patients_by_name_dyn($q, $result_cap, $result_counter, $c, $lab_section);
         }
 	//DB Merging - Currently Disabled 
 	# See if there's a patient by the exact same name in another lab
@@ -762,19 +766,19 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
     <?php 
         if(isset($_REQUEST['l']))
         { 
-            $next_link = "../ajax/patient_data_page.php?q=".$_REQUEST['q']."&a=".$_REQUEST['a']."&l=".$_REQUEST['l']."&result_cap=".$result_cap."&result_counter=".($result_counter+1); 
+            $next_link = "../ajax/patient_data_page.php?q=".$_REQUEST['q']."&a=".$_REQUEST['a']."&c=".$_REQUEST['c']."&l=".$_REQUEST['l']."&result_cap=".$result_cap."&result_counter=".($result_counter + 1); 
         }
         else
         {
-            $next_link = "../ajax/patient_data_page.php?q=".$_REQUEST['q']."&a=".$_REQUEST['a']."&result_cap=".$result_cap."&result_counter=".($result_counter+1);             
+            $next_link = "../ajax/patient_data_page.php?q=".$_REQUEST['q']."&a=".$_REQUEST['a']."&c=".$_REQUEST['c']."&result_cap=".$result_cap."&result_counter=".($result_counter + 1);             
         }
         if(isset($_REQUEST['l']))
         { 
-            $prev_link = "../ajax/patient_data_page.php?q=".$_REQUEST['q']."&a=".$_REQUEST['a']."&l=".$_REQUEST['l']."&result_cap=".$result_cap."&result_counter=".($result_counter - 1); 
+            $prev_link = "../ajax/patient_data_page.php?q=".$_REQUEST['q']."&a=".$_REQUEST['a']."&c=".$_REQUEST['c']."&l=".$_REQUEST['l']."&result_cap=".$result_cap."&result_counter=".($result_counter - 1); 
         }
         else
         {
-            $prev_link = "../ajax/patient_data_page.php?q=".$_REQUEST['q']."&a=".$_REQUEST['a']."&result_cap=".$result_cap."&result_counter=".($result_counter - 1);             
+            $prev_link = "../ajax/patient_data_page.php?q=".$_REQUEST['q']."&a=".$_REQUEST['a']."&c=".$_REQUEST['c']."&result_cap=".$result_cap."&result_counter=".($result_counter - 1);             
         }
     ?>
 <div class="prev_link">                       

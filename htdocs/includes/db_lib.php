@@ -7484,7 +7484,7 @@ function search_patients_by_name($q, $labsection = 0,$c="")
 	return $patient_list;
 }
 
-function search_patients_by_name_dyn($q, $cap, $counter, $labsection = 0,$c="")
+function search_patients_by_name_dyn($q, $cap, $counter, $c="", $labsection = 0)
 {
 	# Searches for patients with similar name
 	global $con;

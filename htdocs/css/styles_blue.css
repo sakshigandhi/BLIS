@@ -341,7 +341,7 @@ dl dt label {
     width: calc(100% - 17px);
 }
 
-#patients_found tbody { border-top: 2px solid black; }
+#patients_found tbody { border-top: 1px solid #9a9a9a; }
 
 #patients_found tbody td, #patients_found thead th {
     width: 10.75%;
