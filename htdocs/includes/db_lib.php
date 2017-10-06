@@ -9366,7 +9366,7 @@ function get_lab_configs($admin_user_id = "")
 			"SELECT * FROM lab_config ".
 			"WHERE admin_user_id=$admin_user_id ".
 			"OR lab_config_id IN ( ".
-			"	SELECT lab_config_id FROM lab_config_access ".
+			"	SELECT lab_config_id FROM user ".
 			"	WHERE user_id=$admin_user_id ".
 			") ORDER BY name";
 	}
