@@ -3500,6 +3500,7 @@ class PageElems
 		# Lists patient-profile related tasks in a tips box
 		global $LIS_CLERK,$LIS_VERIFIER;
 		$specimen = Specimen::getById($specimen_id);
+		$test = Test::getTestBySpecimenID($specimen_id);
 		$deleted = false;
 		if(check_removal_record($_SESSION['lab_config_id'], $specimen_id, "specimen")){
 			$deleted = true;
@@ -3510,8 +3511,12 @@ class PageElems
 			$date_parts = explode("-", $specimen->dateCollected);
 			$report_url = "reports_testhistory.php?location=".$_SESSION['lab_config_id']."&patient_id=".$specimen->patientId."&yf=$date_parts[0]&mf=$date_parts[1]&df=$date_parts[2]&yt=$date_parts[0]&mt=$date_parts[1]&dt=$date_parts[2]";
 			//$report_url = "reports_specimen.php?location=".$_SESSION['lab_config_id']."specimen_id=".$specimen_id;
+			if($test->isVerified()) {
+				?>
+				<p><a href='<?php echo $report_url; ?>' title='Click to Generate Specimen Report' target='_blank'><?php echo LangUtil::$generalTerms['CMD_GETREPORT']; ?></a></p>
+				<?php
+			}
 			?>
-			<p><a href='<?php echo $report_url; ?>' title='Click to Generate Specimen Report' target='_blank'><?php echo LangUtil::$generalTerms['CMD_GETREPORT']; ?></a></p>
 			<p><a href='reports_specimenlog.php?location=<?php echo $_SESSION['lab_config_id']; ?>&specimen_id=<?php echo $specimen_id; ?>' title='Click to View a Log of Actions Performed on this Specimen' target='_blank'><?php echo LangUtil::$generalTerms['CMD_TRACK']; ?></a></p>
 			<?php
 			if($_SESSION['user_level'] != $LIS_CLERK && $deleted == false)
