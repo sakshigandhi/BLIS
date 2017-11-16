@@ -585,11 +585,11 @@ else if( (count($patient_list) == 0 || $patient_list[0] == null) && ($patient !=
 				echo "<th></th>";
 			}
 			?>
-			<th></th>
+<!-- 			<th></th> -->
 			<?php
 				if(is_admin_check($user)){
 			?>
-				<th></th>
+<!-- 				<th></th> -->
 			<?php }?>
 		</tr>
 	</thead>

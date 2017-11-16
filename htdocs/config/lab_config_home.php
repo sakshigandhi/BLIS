@@ -4131,6 +4131,15 @@ function AddnewDHIMS2Config()
 					</div>
 				</div>
 
+				<script type="text/javascript">
+					function savePrintPending() {
+						currentState = 0;
+						if($('#print_verified')[0].checked) currentState = 1;
+						$.ajax({url : "ajax/print_unverified_update.php?lab_config_id="+'<?php echo $lab_config->id; ?>'+"&pv="+currentState});
+					}
+
+				</script>
+
 				<!-- Form for configuring aggregated test reports -->
 				<div class='right_pane' id='test_report_config_div' style='display:none;margin-left:10px;'>
 					<p style="text-align: right;"><a rel='facebox' href='#PFO'>Page Help</a></p>
@@ -4138,6 +4147,8 @@ function AddnewDHIMS2Config()
 					<br><br>
 					<div id='test_report_configuration_msg' class='clean-orange' style='display:none;width:350px;'>
 					</div>
+					<br>
+					<div><input type="checkbox" class="sfields_entry" id="print_verified" <?php if(($page_elems->getPrintUnverified($lab_config->id))==1) { ?> checked <?php }?>  onchange="javascript:savePrintPending();">Allow printing of unverified tests</div>
 					<br>
 					<div id="test_report_configuration_form_div"
 						 style="text-align: center;">

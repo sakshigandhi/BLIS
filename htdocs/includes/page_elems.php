@@ -3676,7 +3676,7 @@ class PageElems
 	}
 	
 	
-	public function getTatStatsTable($stat_list)
+	public function getTatStatsTable($lab_config, $date_from, $date_to)
 	{
 		# Returns HTML table showing Turnaround time values
 		# Called from reports_tat.php
@@ -3696,6 +3696,7 @@ class PageElems
 		</thead>
 		<tbody>
 		<?php
+		$stat_list = StatsLib::getTatStats($lab_config, $date_from, $date_to);
 		foreach($stat_list as $key=>$value)
 		{
 			$test_type_id = $key;
@@ -3707,15 +3708,20 @@ class PageElems
 				<td><?php echo $num_specimens; ?></td>
 				<td>
 					<?php
-					if($tat_value > 1)
-					{
-						echo $tat_value." days";
+					$days = floor($tat_value);
+					$hours = floor(($tat_value - $days)*24);
+					$mins = floor(((($tat_value - $days)*24) - $hours)*60);
+					$avg_tat = "";
+					if($days > 0) {
+						$avg_tat = $avg_tat.$days." days ";
 					}
-					else
-					{
-						$hours_value = $tat_value*24;
-						echo $hours_value." hours";
+					if($hours > 0) {
+						$avg_tat = $avg_tat.$hours." hours ";
 					}
+					if($mins > 0) {
+						$avg_tat = $avg_tat.$mins." mins";
+					}
+					echo $avg_tat;
 					?>
 				</td>
 			</tr>
@@ -10641,6 +10647,12 @@ $name_list = array("yyyy_to".$count, "mm_to".$count, "dd_to".$count);
 		</script>
 		<?php
 	}
+
+	public function getPrintUnverified($lab_config)
+	{
+	    return LabConfig::getPrintUnverified($lab_config);
+	}
+
 
 	public function getTestTypesByReportingStatusOptions($enabled)
 	{

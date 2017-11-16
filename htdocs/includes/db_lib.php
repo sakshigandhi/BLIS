@@ -924,6 +924,30 @@ class LabConfig
 		DbUtil::switchRestore($saved_db);
 		*/
 	}
+
+	public function getPrintUnverified($lab_config)
+	{
+		$saved_db = DbUtil::switchToLabConfigRevamp($this->id);
+		# Returns a list of all test type IDs added to the lab configuration
+		$query_string = 
+			"SELECT distinct print_unverified FROM lab_config_test_type ".
+			"WHERE lab_config_id=".$lab_config;
+		$resultset = query_associative_one($query_string);
+		DbUtil::switchRestore($saved_db);
+		return $resultset['print_unverified'];
+	}
+
+	public function setPrintUnverified($lab_config, $print_unverified)
+	{
+		$saved_db = DbUtil::switchToLabConfigRevamp($lab_config);
+		$query_string = 
+			"UPDATE lab_config_test_type ".
+			"SET print_unverified=".$print_unverified.
+			" WHERE lab_config_id=$lab_config";
+		query_update($query_string);
+		DbUtil::switchRestore($saved_db);
+	}
+
 	
 	public function getTestTypeIds()
 	{
