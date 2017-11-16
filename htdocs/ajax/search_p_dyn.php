@@ -169,42 +169,39 @@ background-color:#EAF2D3;
 	/*color: red; /*#009;*/
 }
 
-#data_table table {
+#patient_search_results table {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
 }
 
-#data_table thead, #data_table tbody, #data_table tr, #data_table td, #data_table th { display: block; }
+#patient_search_results thead, #patient_search_results tbody, #patient_search_results tr, #patient_search_results td, #patient_search_results th { display: block; }
 
-#data_table tr:after {
+#patient_search_results tr:after {
     content: ' ';
     display: block;
     visibility: hidden;
     clear: both;
 }
 
-#data_table thead th { 
+#patient_search_results thead th { 
     height: 30px;
     line-height: 30px;
-    /*text-align: left;*/
 }
 
-#data_table tbody {
+#patient_search_results tbody {
     height: 400px;
     overflow-y: auto;
 }
 
-#data_table thead {
-    /* fallback */
+#patient_search_results thead {
     width: 97%;
-    /* minus scroll bar width */
     width: calc(100% - 17px);
 }
 
-#data_table tbody { border-top: 1px solid #9a9a9a; }
+#patient_search_results tbody { border-top: 1px solid #9a9a9a; }
 
-#data_table tbody td, #data_table thead th {
+#patient_search_results tbody td, #patient_search_results thead th {
     width: 10%;
     float: left;
     height: 20px;
@@ -212,7 +209,7 @@ background-color:#EAF2D3;
     text-align: center;
 }
 
-#data_table tbody td:last-child, #data_table thead th:last-child {
+#patient_search_results tbody td:last-child, #patient_search_results thead th:last-child {
     border-right: none;
 }
 

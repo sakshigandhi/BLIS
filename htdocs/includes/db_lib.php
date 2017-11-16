@@ -927,7 +927,7 @@ class LabConfig
 
 	public function getPrintUnverified($lab_config)
 	{
-		$saved_db = DbUtil::switchToLabConfigRevamp($this->id);
+		$saved_db = DbUtil::switchToLabConfigRevamp($lab_config);
 		# Returns a list of all test type IDs added to the lab configuration
 		$query_string = 
 			"SELECT distinct print_unverified FROM lab_config_test_type ".
